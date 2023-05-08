@@ -114,7 +114,7 @@ const thoughtController = {
       if (!dbUserData) {
         return res
           .status(404)
-          .json({ message: "Thought created but no user found with this id!" });
+          .json({ message: "Thought created but no user found related to this id!" });
       }
 
       res.json({ message: "Thought successfully deleted!" });
@@ -134,7 +134,7 @@ const thoughtController = {
       if (!dbThoughtInfo) {
         return res
           .status(404)
-          .json({ message: "No thought found with this id!" });
+          .json({ message: "No thought found related to this id!" });
       }
       res.json(dbThoughtInfo);
     } catch (err) {
