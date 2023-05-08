@@ -57,23 +57,103 @@ const thoughtController = {
   // create a thought
   async createThought({ params, body }, res) {
     try {
-      const createdThought = await thought.create(body);
-      const updatedUser = await user.findOneAndUpdate(
+      const { _id } = await Thought.create(body);
+      const dbUserData = await User.findOneAndUpdate(
         { _id: body.userId },
-        { $push: { thoughts: createdThought._id } },
+        { $push: { thoughts: _id } },
         { new: true }
       );
-      if (!updatedUser) {
+
+      if (!dbUserData) {
         return res
           .status(404)
-          .json({
-            message:
-              "Thought has been created, but there is no user relates to this id!",
-          });
+          .json({ message: "Thought created but no user with this id!" });
       }
-      res.json({ message: "Thought has been created successfully!" });
+
+      res.json({ message: "Thought successfully created!" });
+    } catch (err) {
+      res.json(err);
+    }
+  },
+
+  // update thought by ID
+  async updateThought({ params, body }, res) {
+    try {
+      const dbThoughtInfo = await Thought.findOneAndUpdate(
+        { _id: params.id },
+        body,
+        { new: true, runValidators: true }
+      );
+      if (!dbThoughtInfo) {
+        return res
+          .status(404)
+          .json({ message: "No thought found related to this id!" });
+      }
+      res.json(dbThoughtInfo);
+    } catch (err) {
+      res.json(err);
+    }
+  },
+
+  // delete Thought
+  async deleteThought({ params }, res) {
+    try {
+      const dbThoughtInfo = await thought.findOneAndDelete({ _id: params.id });
+      if (!dbThoughtInfo) {
+        return res
+          .status(404)
+          .json({ message: "No thought found related to this id!" });
+      }
+
+      const dbUserData = await user.findOneAndUpdate(
+        { thoughts: params.id },
+        // $pull removes from value already created that connect to a certain condition
+        { $pull: { thoughts: params.id } },
+        { new: true }
+      );
+      if (!dbUserData) {
+        return res
+          .status(404)
+          .json({ message: "Thought created but no user found with this id!" });
+      }
+
+      res.json({ message: "Thought successfully deleted!" });
+    } catch (err) {
+      res.json(err);
+    }
+  },
+
+  // adding a reaction
+  async addReaction({ params, body }, res) {
+    try {
+      const dbThoughtInfo = await thought.findOneAndUpdate(
+        { _id: params.thoughtId },
+        { $push: { reactions: body } },
+        { new: true, runValidators: true }
+      );
+      if (!dbThoughtInfo) {
+        return res
+          .status(404)
+          .json({ message: "No thought found with this id!" });
+      }
+      res.json(dbThoughtInfo);
+    } catch (err) {
+      res.json(err);
+    }
+  },
+
+  async removeReaction({ params }, res) {
+    try {
+      const dbThoughtInfo = await Thought.findOneAndUpdate(
+        { _id: params.thoughtId },
+        { $pull: { reactions: { reactionId: params.reactionId } } },
+        { new: true }
+      );
+      res.json(dbThoughtInfo);
     } catch (err) {
       res.json(err);
     }
   },
 };
+
+module.exports = thoughtController;
