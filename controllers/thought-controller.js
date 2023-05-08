@@ -55,4 +55,25 @@ const thoughtController = {
   },
 
   // create a thought
+  async createThought({ params, body }, res) {
+    try {
+      const createdThought = await thought.create(body);
+      const updatedUser = await user.findOneAndUpdate(
+        { _id: body.userId },
+        { $push: { thoughts: createdThought._id } },
+        { new: true }
+      );
+      if (!updatedUser) {
+        return res
+          .status(404)
+          .json({
+            message:
+              "Thought has been created, but there is no user relates to this id!",
+          });
+      }
+      res.json({ message: "Thought has been created successfully!" });
+    } catch (err) {
+      res.json(err);
+    }
+  },
 };
