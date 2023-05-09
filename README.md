@@ -22,7 +22,7 @@ To install this project, clone this repository on Github and open it in your per
 Express.js, Mongoose, MongoDB, node.js
 
 ## Usage
-In your IDE termianl, open the command line and type either 'node server.js' or 'npm start' to run the server. Once started, open 
+In your IDE termianl, open the command line and type either 'node server.js' or 'npm start' to run the server. Once started, you will be able to use an API testing software to make different requests to each API endpoint.
 
 ## Contributors 
 N/A, Marley Schneider

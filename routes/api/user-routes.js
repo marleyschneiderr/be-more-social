@@ -2,7 +2,7 @@ const router = require("express").Router();
 
 // put in user controller methods
 const {
-  getAllUser,
+  getAllUsers,
   getUserById,
   createUser,
   updateUser,
@@ -12,7 +12,7 @@ const {
 } = require("../../controllers/user-controller");
 
 // controller methods
-router.get("/users", getAllUser); // GET /api/users
+router.get("/users", getAllUsers); // GET /api/users
 router.post("/users", createUser); // POST /api/users
 
 router.get("/users/:id", getUserById); // GET /api/users/:id
