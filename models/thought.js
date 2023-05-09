@@ -7,7 +7,7 @@ const { Schema } = mongoose;
 const reactionSchema = new Schema(
   {
     reactionId: {
-        // using the object data type
+      // using the object data type
       type: Schema.Types.ObjectId,
       // setting a default value to a new ObjectId
       default: () => new mongoose.Types.ObjectId(),
@@ -27,7 +27,7 @@ const reactionSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now,
-      // formatting the timestamp 
+      // formatting the timestamp
       get: (timestamp) => formatDate(timestamp),
     },
   },
@@ -59,7 +59,7 @@ const thoughtSchema = new Schema(
       required: true,
     },
 
-    reactions: [reactionSchema], // array of nested documents with the reactionSchema 
+    reactions: [reactionSchema], // array of nested documents with the reactionSchema
   },
   {
     toJSON: {
@@ -77,6 +77,6 @@ thoughtSchema.virtual("reactionCount").get(function () {
 // make the Thought model
 const Thought = mongoose.model("Thought", thoughtSchema);
 
-// exporting the Thought model to use in other files 
+// exporting the Thought model to use in other files
 module.exports = Thought;
 
