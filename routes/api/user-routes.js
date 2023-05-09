@@ -23,3 +23,4 @@ router.post("/users/:userId/friends/:friendId", addFriend); // POST /api/users/:
 router.delete("/users/:userId/friends/:friendId", removeFriend); // DELETE /api/users/:userId/friends/:friendId
 
 module.exports = router;
+
