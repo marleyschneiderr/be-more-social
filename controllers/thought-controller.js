@@ -6,7 +6,7 @@ const thoughtController = {
   async getAllThought(req, res) {
     try {
       // find  all thoughts
-      const dbThoughtInfo = await thought
+      const dbThoughtInfo = await Thought
         .find({})
         // populate the reactions field of each thought with its associated reactions, excluding __v field from popping up
         .populate({
