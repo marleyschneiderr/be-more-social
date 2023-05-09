@@ -3,9 +3,11 @@ An API for a social network web application where users can share their thoughts
 
 ## Description
 
+## Walkthrough Video 
+
 
 ## Screenshot of Live Application
-![alt-text](./images/.png)
+![alt-text](./images/npm-start.png)
 
 ## Table of Contents
 * [Installation](#installation)
