@@ -5,7 +5,7 @@ An API for a social network web application where users can share their thoughts
 An API application for a social network web app that allows users to share their opinions, react to the thoughts of their friends, and construct a friend list. For routing, I utilized Express.js, a MongoDB database, and the Mongoose ODM. In addition to Express.js and Mongoose, I formatted timestamps using a JavaScript date library.
 
 ## Walkthrough Video 
-
+https://drive.google.com/file/d/1hdZl9W89dOukRcrZ6jYHK2YTKBs7Ggl8/view
 
 ## Screenshot of Live Application
 ![alt-text](./images/npm-start.png)
