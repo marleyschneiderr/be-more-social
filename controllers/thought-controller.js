@@ -60,7 +60,7 @@ const thoughtController = {
       const { _id } = await Thought.create(body);
       const dbUserData = await User.findOneAndUpdate(
         { _id: body.userId },
-        { $push: { Thoughts: _id } },
+        { $addToSet: { Thoughts: _id } },
         { new: true }
       );
 
@@ -129,8 +129,8 @@ const thoughtController = {
   async addReaction({ params, body }, res) {
     try {
       const dbThoughtInfo = await Thought.findOneAndUpdate(
-        { _id: params.ThoughtId },
-        { $push: { reactions: body } },
+        { _id: params.thoughtId },
+        { $addToSet: { reactions: body } },
         { new: true, runValidators: true }
       );
       if (!dbThoughtInfo) {
