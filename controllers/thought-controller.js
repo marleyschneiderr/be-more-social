@@ -60,7 +60,7 @@ const thoughtController = {
       const { _id } = await Thought.create(body);
       const dbUserData = await User.findOneAndUpdate(
         { _id: body.userId },
-        { $addToSet: { Thoughts: _id } },
+        { $push: { Thoughts: _id } },
         { new: true }
       );
 
